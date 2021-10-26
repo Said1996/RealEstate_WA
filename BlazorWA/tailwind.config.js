@@ -10,7 +10,9 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                cyan: colors.cyan
+                cyan: colors.cyan,
+                prim: '#c977f7',
+                sec: '#af38f2',
             }
         },
     },
