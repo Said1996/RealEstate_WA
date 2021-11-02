@@ -1,16 +1,24 @@
 ﻿@page "/Shop"
+@inject HttpClient Http
 
 
-<SearchBar />
+<SearchBar SearchQuery="@SearchInput"/>
+<h1>@SearchInput</h1>
+<Filter/>
+
+
 
 <div class="grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-	@for (var i = 0; i < 12; i++)
+	@foreach(var realEstate in realEstates)
    {
-		<RealEstateCard />
+	<RealEstateCard RealEstate="@realEstate"/>
 
    }
 
 </div>
+
+
+
 <div class="flex justify-center my-10">
 	<Pagination/>
 </div>
@@ -19,4 +27,23 @@
 
 @code {
 
+	public string SearchInput 
+	{ get; 
+		set; }
+
+	private List<RealEstate> realEstates = new List<RealEstate>();
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		try {
+			realEstates = await Http.GetFromJsonAsync<List<RealEstate>>("RealEstate?PageNumber=1&PageSize=20");
+
+		}
+		catch (Exception e)
+		{
+			
+		}
+	}
+	
 }
