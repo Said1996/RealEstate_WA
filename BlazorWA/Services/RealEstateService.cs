@@ -1,9 +1,8 @@
-﻿using BlazorWA.Models;
-using System.Net.Http.Json;
+﻿using BlazorWA.Services.Interfaces;
 
-namespace BlazorWA.ApiCalls
+namespace BlazorWA.Services
 {
-    public class RealEstateService
+    public class RealEstateService : IRealEstateService
     {
         private readonly HttpClient httpClient;
 
@@ -12,9 +11,10 @@ namespace BlazorWA.ApiCalls
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<RealEstate>> Search(string searchQuery)
+        public async Task<HttpResponseMessage> SearchRequest(string searchQuery)
         {
-            return await httpClient.GetFromJsonAsync<RealEstate[]>(searchQuery);
+            var responseMessage = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, searchQuery));
+            return responseMessage;
         }
 
     }

@@ -1,9 +1,9 @@
 ﻿@page "/Shop"
 @inject HttpClient Http
+@inject IShopViewModel shopViewModel
 
 
-<SearchBar SearchQuery="@SearchInput"/>
-<h1>@SearchInput</h1>
+<SearchBar OnSearch="GetRealEstates"/>
 <Filter/>
 
 
@@ -27,23 +27,26 @@
 
 @code {
 
-	public string SearchInput 
-	{ get; 
-		set; }
 
-	private List<RealEstate> realEstates = new List<RealEstate>();
+
+	private RealEstate[] realEstates = Array.Empty<RealEstate>();
 
 
 	protected override async Task OnInitializedAsync()
 	{
 		try {
-			realEstates = await Http.GetFromJsonAsync<List<RealEstate>>("RealEstate?PageNumber=1&PageSize=20");
+			realEstates = await Http.GetFromJsonAsync<RealEstate[]>("Search?PageNumber=1&PageSize=20");
 
 		}
 		catch (Exception e)
 		{
 			
 		}
+	}
+
+	public async Task GetRealEstates()
+	{
+		realEstates = shopViewModel.RealEstateData;
 	}
 	
 }

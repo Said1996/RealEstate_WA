@@ -5,14 +5,14 @@ namespace BlazorWA.Models
     public class RealEstate
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-
-        public string? Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
         public int? Price { get; set; }
         public double? Space { get; set; }
 
-        public int? RoomNum { get; set; }
+
+        public int? BedroomNum { get; set; }
         public int? BathroomNum { get; set; }
         public int? KitchenNum { get; set; }
 
