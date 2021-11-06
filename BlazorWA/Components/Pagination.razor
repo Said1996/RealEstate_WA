@@ -1,13 +1,50 @@
-﻿<nav aria-label="Page navigation">
+﻿@inject IShopViewModel shopViewModel
+
+<nav aria-label="Page navigation">
   <ul class="inline-flex">
-    <li><button class="h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white rounded-l-lg focus:shadow-outline hover:bg-indigo-100">Prev</button></li>
-    <li><button class="h-12 px-6 text-white transition-colors duration-150 bg-indigo-600 focus:shadow-outline">1</button></li>
-    <li><button class="h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white focus:shadow-outline hover:bg-indigo-100">2</button></li>
-    <li><button class="h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white focus:shadow-outline hover:bg-indigo-100">3</button></li>
-    <li><button class="h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100">Next</button></li>
+    <li><button @onclick="@(() => PageChanged(shopViewModel.CurrentPage - 1))" disabled="@shopViewModel.DisablePrev"  class=" h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white rounded-l-lg disabled:opacity-50 focus:shadow-outline hover:bg-indigo-100">Prev</button></li>
+    <li><button @onclick="@(() => PageChanged(firstPage))"  class="@(shopViewModel.CurrentPage == 1? "bg-indigo-600 text-white" : "bg-white text-indigo-600") h-12 px-6 transition-colors duration-150 focus:shadow-outline">@firstPage</button></li>
+    @if (shopViewModel.TotalPages > 1)
+    {
+        <li><button @onclick="@(() => PageChanged(firstPage + 1))"  class="@(shopViewModel.CurrentPage > 1 && shopViewModel.CurrentPage < shopViewModel.TotalPages? "bg-indigo-600 text-white" : "bg-white text-indigo-600") h-12 px-6  transition-colors duration-150  focus:shadow-outline hover:bg-indigo-100 ">@(firstPage + 1)</button></li>
+    }
+    @if(shopViewModel.TotalPages > 2)
+    {
+        <li><button @onclick="@(() => PageChanged(firstPage + 2))" class="@(shopViewModel.CurrentPage == shopViewModel.TotalPages? "bg-indigo-600 text-white" : "bg-white text-indigo-600" ) h-12 px-6  transition-colors duration-150  focus:shadow-outline hover:bg-indigo-100 ">@(firstPage + 2)</button></li>
+    }
+    <li><button @onclick="@(() => PageChanged(shopViewModel.CurrentPage + 1))" disabled="@shopViewModel.DisableNext" class="h-12 px-6 text-indigo-600 transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100 disabled:opacity-50">Next</button></li>
   </ul>
 </nav>
 
 @code {
+
+    private int firstPage = 1;
+
+    protected override void OnInitialized()
+    {
+        shopViewModel.PageClick =  EventCallback.Factory.Create( this, Refresh );
+    }
+
+    private void Refresh()
+    {
+
+    }
+
+
+    [Parameter]
+    public EventCallback OnSearch { get; set; }
+
+    private async Task PageChanged(int pageNumber)
+    {
+        shopViewModel.CurrentPage = pageNumber;
+        if (pageNumber == shopViewModel.TotalPages && pageNumber != 2)
+            firstPage = pageNumber - 2;
+        else if (pageNumber == 1)
+            firstPage = 1;
+        else
+            firstPage = pageNumber - 1;
+        await shopViewModel.Search();
+        await OnSearch.InvokeAsync();
+    }
 
 }

@@ -19,12 +19,13 @@
     private string searchQuery;
 
     [Parameter]
-    public EventCallback<bool> OnSearch { get; set; }
+    public EventCallback OnSearch { get; set; }
 
     public async Task Search()
     {
         shopViewModel.SearchQuery = searchQuery;
         await shopViewModel.Search();
+        await shopViewModel.PageClick.InvokeAsync();
         await OnSearch.InvokeAsync();
     }
 

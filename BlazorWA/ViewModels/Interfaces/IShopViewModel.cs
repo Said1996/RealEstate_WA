@@ -1,4 +1,5 @@
 ﻿using BlazorWA.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWA.ViewModels.Interfaces
 {
@@ -11,7 +12,8 @@ namespace BlazorWA.ViewModels.Interfaces
         int TotalPages { get; set; }
         int ResultCount { get; set; }
 
-
+        bool DisableNext { get; set; }
+        bool DisablePrev { get; set; }
 
         string PriceFrom { get; set; }
         string PriceTo { get; set; }
@@ -27,7 +29,7 @@ namespace BlazorWA.ViewModels.Interfaces
 
         RealEstate[] RealEstateData { get; set; }
 
-
+        EventCallback PageClick { get; set; }
 
         Task Search();
     }
