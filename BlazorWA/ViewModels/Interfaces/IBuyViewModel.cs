@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorWA.ViewModels.Interfaces
 {
-    public interface IShopViewModel
+    public interface IBuyViewModel
     {
         string SearchQuery { get; set; }
 

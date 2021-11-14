@@ -23,5 +23,8 @@ namespace BlazorWA.Models
         public bool? SwimmingPool { get; set; }
         public bool? SecuritySystem { get; set; }
         public bool? Garden { get; set; }
+
+        public User GetUser { get; set; }
+
     }
 }

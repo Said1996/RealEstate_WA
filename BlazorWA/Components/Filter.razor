@@ -1,13 +1,14 @@
-﻿@inject IShopViewModel shopViewModel
+﻿@inject IBuyViewModel shopViewModel
 
 
 
 <!-- component -->
   <div class="flex flex-col items-center">
-      <button class=" bg-indigo-600 rounded-b-full shadow-xl w-32 h-10 text-white tracking-wider">Filter</button>
-            <section class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-6">
+      <button @onclick="ShowFilter" class=" bg-indigo-600 rounded-b-full shadow-xl w-32 h-10 text-white tracking-wider">Filter</button>
+     <div id="filterSection" class="filterSection max-w-4xl  mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-6">
+         <div  class="  p-6">
 
-    <h1 class="text-xl mb-6 font-bold text-white capitalize dark:text-white">Filter Settings</h1>
+    <p class="text-xl mb-6 font-bold text-white capitalize dark:text-white">Filter Settings</p>
     
         <div class="grid gap-5 lg:grid-cols-2  md:grid-cols-2 sm:grid-cols-1 ">
             <div class="flex flex-row gap-3 ">
@@ -57,18 +58,84 @@
             <button @onclick="SaveFilter" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
         </div>
     
-</section>
+</div>
+     </div>
+    
   </div>
 
 
 
+  
+<style>
+	#filterSection {
+        animation-duration: 300ms;
+		animation-name: @showFilter ;
+        animation-fill-mode: forwards;
+      
+        overflow: hidden;
+	}
+
+
+    @@keyframes default{
+		0%
+		{
+            max-height: 0rem;
+		}
+        100%
+		{
+            max-height: 0rem;
+		}
+    }
+
+	@@keyframes show{
+		0%
+		{
+            max-height: 0rem;
+		}
+        100%
+		{
+            max-height: 30rem;
+		}
+
+	}
+
+	@@keyframes hide{
+		0%
+		{
+            max-height: 30rem;
+		}
+        100%
+		{
+            max-height: 0rem;
+		}
+	}
+
+
+
+</style>
+
+
 @code {
+
+    private string showFilter = "default";
+
+
     private string? priceFrom;
     private string? priceTo;
     private string? roomNum;
     private string? bathNum;
     private string? spaceFrom;
     private string? spaceTo;
+
+    private void ShowFilter()
+    {
+        if (showFilter != "show")
+            showFilter = "show";
+        else
+            showFilter = "hide";
+
+    }
+
 
     private void SaveFilter()
     {

@@ -12,7 +12,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44388/api/") });
-builder.Services.AddScoped<IShopViewModel, ShopViewModel>();
+builder.Services.AddScoped<IBuyViewModel, BuyViewModel>();
 builder.Services.AddScoped<IRealEstateService, RealEstateService>();
 
 await builder.Build().RunAsync();

@@ -1,6 +1,6 @@
 ﻿namespace BlazorWA.Models.Response
 {
-    public class SearchResponseModel
+    public class SearchPaginationResponse
     {
         public int TotalCount { get; set; }
         public int TotalPages { get; set; }

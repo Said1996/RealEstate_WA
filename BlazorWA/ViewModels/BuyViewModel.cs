@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 
 namespace BlazorWA.ViewModels
 {
-    public class ShopViewModel : IShopViewModel
+    public class BuyViewModel : IBuyViewModel
     {
         private readonly IRealEstateService realEstateService;
 
-        public ShopViewModel(IRealEstateService realEstateService)
+        public BuyViewModel(IRealEstateService realEstateService)
         {
             this.realEstateService = realEstateService;
         }
@@ -62,7 +62,7 @@ namespace BlazorWA.ViewModels
             var pagination = response.Headers.FirstOrDefault(h => h.Key == "x-pagination").Value.FirstOrDefault();
             if (pagination != null)
             {
-                var header = JsonConvert.DeserializeObject<SearchResponseModel>(pagination);
+                var header = JsonConvert.DeserializeObject<SearchPaginationResponse>(pagination);
                 if (header != null)
                 {
                     TotalPages = header.TotalPages;
