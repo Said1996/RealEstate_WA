@@ -24,7 +24,7 @@ namespace BlazorWA.Models
         public bool? SecuritySystem { get; set; }
         public bool? Garden { get; set; }
 
-        public User GetUser { get; set; }
+        public RegisterModel GetUser { get; set; }
 
     }
 }

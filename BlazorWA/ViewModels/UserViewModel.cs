@@ -1,18 +1,36 @@
-﻿using BlazorWA.ViewModels.Interfaces;
+﻿using BlazorWA.Models;
+using BlazorWA.Models.Response;
+using BlazorWA.Services.Interfaces;
+using BlazorWA.ViewModels.Interfaces;
 
 namespace BlazorWA.ViewModels
 {
     public class UserViewModel : IUserViewModel
     {
+        private readonly IUserService userService;
+
+        public UserViewModel(IUserService userService)
+        {
+            this.userService = userService;
+        }
+
+        public User User { get; set; }
         public string Token { get; set; }
 
-        public string Name { get; set; }
 
-        public string Email { get; set; }
+        public async Task<(bool IsSuccessful, string Message)> SignUpAsync(RegisterModel registerModel)
+        {
+            return await userService.Register(registerModel);
+        }
 
-        public string PhotoPath { get; set; }
+        public async Task<LoginResult> SignInAsync(TokenRequestModel tokenRequestModel)
+        {
+            return await userService.Login(tokenRequestModel);
+        }
 
-        public string PhoneNumber { get; set; }
-
+        public async Task Logout()
+        {
+            await userService.Logout();
+        }
     }
 }

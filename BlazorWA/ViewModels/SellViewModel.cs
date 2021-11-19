@@ -20,7 +20,7 @@ namespace BlazorWA.ViewModels
 
         public int BathroomNum { get; set; }
 
-        public User GetUser { get; set; }
+        public RegisterModel GetUser { get; set; }
 
     }
 }

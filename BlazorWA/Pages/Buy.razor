@@ -1,6 +1,6 @@
 ﻿@page "/Buy"
 @inject HttpClient Http
-@inject IBuyViewModel shopViewModel
+@inject IBuyViewModel buyViewModel
 
 
 <SearchBar OnSearch="GetRealEstates"/>
@@ -45,7 +45,7 @@
 
 	public async Task GetRealEstates()
 	{
-		realEstates = shopViewModel.RealEstateData;
+		realEstates = buyViewModel.RealEstateData;
 	}
 	
 }

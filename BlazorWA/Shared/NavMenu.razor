@@ -1,24 +1,67 @@
-﻿<ul class="flex justify-end mt-6 ml-8 text-white uppercase tracking-wider  ">
-    <li>
+﻿@inject IUserViewModel userViewModel
+
+
+<div class="flex justify-between flex-grow mt-6 ml-8 text-white uppercase tracking-wider  ">
+    <ul class="flex">
+        <li>
         <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400" href="" Match="NavLinkMatch.All">
             Home
         </NavLink>
-    </li>
-    <li>
-        <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400" href="Buy">
-            Buy
-        </NavLink>
-    </li>
+        </li>
+        <li>
+            <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400" href="Buy">
+                Buy
+            </NavLink>
+        </li>
   
-    <li>
-        <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400 " href="Sell">
-            Sell
-        </NavLink>
-    </li>
-    <li>
-        <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400 " href="Contact">
-            Contact Us
-        </NavLink>
-    </li>
-     
-</ul>
+        <li>
+            <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400 " href="Sell">
+                Sell
+            </NavLink>
+        </li>
+        <li>
+            <NavLink class="mr-6 pb-2 border-b-4 border-purple-700 hover:border-green-400 " href="Contact">
+                Contact Us
+            </NavLink>
+        </li>
+    </ul>
+    
+    <ul class="flex">
+        <AuthorizeView>
+            <NotAuthorized>
+                <li >
+                    <NavLink class="uppercase mt-6 text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="SignIn">Sign In</NavLink>
+                </li>
+                <li>
+                    <NavLink class="uppercase mt-6 justify-end text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="SignUp">
+                        Sign Up
+                    </NavLink>
+                </li>
+            </NotAuthorized>
+            <Authorized>
+                 <li>
+                    <NavLink class="uppercase mt-6 justify-end text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="Profile">
+                        Hello @context.User.Identity.Name
+                    </NavLink>
+                </li>
+                <li >
+                    <NavLink @onclick="Logout" class="uppercase mt-6 text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="">Logout</NavLink>
+                </li>
+                
+                
+            </Authorized>
+        </AuthorizeView>
+
+    </ul>
+    
+</div>
+
+@code{
+
+    private async Task Logout()
+    {
+        
+        await userViewModel.Logout();
+    }
+
+}

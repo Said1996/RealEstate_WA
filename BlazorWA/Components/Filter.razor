@@ -26,12 +26,21 @@
             <div class="flex flex-row gap-3 ">
                 <div>
                     <label class="text-white dark:text-gray-200" for="country">Country</label>
-                    <input id="country" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                    <select @bind="@country"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <option>--Select--</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="USA">USA</option>
+                        
+                    </select>
                 </div>
 
                 <div>
                     <label class="text-white dark:text-gray-200" for="city">City</label>
-                    <input id="city" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                    <select @bind="@city"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <option value="Cairo">Cairo</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Sohag">Sohag</option>
+                    </select>
                 </div>
             </div>
 
@@ -119,7 +128,8 @@
 
     private string showFilter = "default";
 
-
+    private string? country;
+    private string? city;
     private string? priceFrom;
     private string? priceTo;
     private string? roomNum;
