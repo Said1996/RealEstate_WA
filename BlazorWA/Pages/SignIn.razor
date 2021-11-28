@@ -46,7 +46,7 @@
     {
         var result = await userViewModel.SignInAsync(tokenRequestModel);
         if (result.IsSuccessful)
-            nav.NavigateTo("");
+            nav.NavigateTo("/");
         else
             errorMessage = result.Message;
 

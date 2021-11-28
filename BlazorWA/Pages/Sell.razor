@@ -1,4 +1,74 @@
-﻿<h3>Sell</h3>
+﻿@page "/Sell"
+
+<div class="flex flex-col items-center">
+      
+     <div class="filterSection max-w-4xl  mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-6">
+         <div  class="  p-6">
+
+    <p class="text-xl mb-6 font-bold text-white capitalize dark:text-white">Filter Settings</p>
+    
+        <div class="grid gap-5 lg:grid-cols-2  md:grid-cols-2 sm:grid-cols-1 ">
+            <div class="flex flex-row gap-3 ">
+                <div>
+                    <label class="text-white dark:text-gray-200" for="priceFrom">Price From</label>
+                    <input  id="priceFrom" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                </div>
+
+                <div>
+                    <label class="text-white dark:text-gray-200" for="priceTo">Price To</label>
+                    <input  id="priceTo" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                </div>
+            </div>
+            
+            <div class="flex flex-row gap-3 ">
+                <div>
+                    <label class="text-white dark:text-gray-200" for="country">Country</label>
+                    <select   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <option>--Select--</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="USA">USA</option>
+                        
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-white dark:text-gray-200" for="city">City</label>
+                    <select  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                        <option>--Select--</option>
+                        <option value="Cairo">Cairo</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Sohag">Sohag</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex flex-row gap-3 ">
+                <div>
+                    <label class="text-white dark:text-gray-200" for="country">Bedrooms</label>
+                    <input  id="country" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                </div>
+
+                <div>
+                    <label class="text-white dark:text-gray-200" for="city">Bathrooms</label>
+                    <input  id="city" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                </div>
+            </div>
+
+            
+
+          
+         
+            
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <button  class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
+        </div>
+    
+        </div>
+     </div>
+    
+  </div>
 
 @code {
 

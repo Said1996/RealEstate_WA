@@ -1,4 +1,5 @@
-﻿@inject IUserViewModel userViewModel
+﻿@using System.Security.Claims
+@inject IUserViewModel userViewModel
 
 
 <div class="flex justify-between flex-grow mt-6 ml-8 text-white uppercase tracking-wider  ">
@@ -41,7 +42,7 @@
             <Authorized>
                  <li>
                     <NavLink class="uppercase mt-6 justify-end text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="Profile">
-                        Hello @context.User.Identity.Name
+                         @context.User.Claims.SingleOrDefault(x => x.Type == "Name").Value.ToString()
                     </NavLink>
                 </li>
                 <li >

@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using BlazorWA.Models.Response;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -25,14 +26,26 @@ namespace BlazorWA.Services
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", savedToken);
 
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
         }
 
-        public void MarkUserAsAuthenticated(string email)
+        public void MarkUserAsAuthenticated(LoginResult loginResult)
         {
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "apiauth"));
+            Claim[] claims = { };
+            foreach (var role in loginResult.Roles)
+            {
+                claims.Append(new Claim(ClaimTypes.Role, role));
+            }
+
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[]
+            {
+                new Claim("Email", loginResult.Email),
+                new Claim("Name", loginResult.FullName),
+                new Claim("PhoneNumber", loginResult.PhoneNumber),
+
+            }, "apiauth"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             NotifyAuthenticationStateChanged(authState);
         }

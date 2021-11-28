@@ -34,7 +34,7 @@
 	protected override async Task OnInitializedAsync()
 	{
 		try {
-			realEstates = await Http.GetFromJsonAsync<RealEstate[]>("Search?PageNumber=1&PageSize=20");
+			realEstates = await Http.GetFromJsonAsync<RealEstate[]>("RealEstate/Search?PageNumber=1&PageSize=10");
 
 		}
 		catch (Exception e)
