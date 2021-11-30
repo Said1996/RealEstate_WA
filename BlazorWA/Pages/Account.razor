@@ -1,168 +1,104 @@
 ﻿@page "/Account"
 @layout EmptyLayout
+@inject IUserViewModel userViewModel
 
 
-<!-- component -->
 
 
-
-<section class=" py-1 bg-blueGray-50">
-<div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
-  <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-    <div class="rounded-t bg-white mb-0 px-6 py-6">
-      <div class="text-center flex justify-between">
-        <h6 class="text-blueGray-700 text-xl font-bold">
-          My account
-        </h6>
-        <button class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button">
-          Settings
-        </button>
-      </div>
-    </div>
-     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          User Information
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Username
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="lucky.jesse">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Email address
-              </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="jesse@example.com">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                First Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Lucky">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Last Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Jesse">
-            </div>
-          </div>
-        </div>
-        </form>
-        </div>
-        <hr class="mt-6 border-b-1 border-blueGray-300">
-
-    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-      <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          User Information
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Username
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="lucky.jesse">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Email address
-              </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="jesse@example.com">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                First Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Lucky">
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Last Name
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Jesse">
-            </div>
-          </div>
-        </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300">
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Contact Information
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Address
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                City
-              </label>
-              <input type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="New York">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Country
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="United States">
-            </div>
-          </div>
-          <div class="w-full lg:w-4/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                Postal Code
-              </label>
-              <input type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="Postal Code">
-            </div>
-          </div>
-        </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300">
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          About Me
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
-                About me
-              </label>
-              <textarea type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4"> A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Open Source.</textarea>
-            </div>
-          </div>
-        </div>
-      </form>
+<EditForm Model="@user" OnValidSubmit="@OnValidUserEdit" class="w-full relative mt-4 shadow-2xl rounded my-24 overflow-hidden">
+  <div class="top h-64 w-full bg-blue-600 overflow-hidden relative" >
+    <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" class="bg w-full h-full object-cover object-center absolute z-0">
+    <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
+      <img src="@(user.PhotoPath ?? "https://via.placeholder.com/450x450")" class="h-24 w-24 object-cover rounded-full">
+      <InputFile @OnChange="uploadFile" hidden="@isDisabled" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Change Picture</InputFile>
+      <h1 class="text-2xl font-semibold">Antonia Howell</h1>
+      <h4 class="text-sm font-semibold">Joined Since '19</h4>
     </div>
   </div>
-  
-</div>
-</section>
-@code {
+  <div class="grid grid-cols-12 bg-white ">
 
+    <div class="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
+
+      <a href="#" class="text-sm p-2 bg-indigo-900 text-white text-center rounded font-bold">Basic Information</a>
+
+      <a href="#" class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">User Offers</a>
+
+
+    </div>
+
+    <div class="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
+      <div class="px-4 pt-4">
+        <div action="#" class="flex flex-col space-y-8">
+
+          <div class="flex justify-between">
+            <h3 class="text-2xl font-semibold">Basic Information</h3>
+            <button @onclick="Edit" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Edit</button>
+          </div>
+            <hr>
+
+          <div class="form-item">
+            <label class="text-xl ">Full Name</label>
+            <input disabled="@isDisabled" type="text" value="@user.FullName" class="w-full appearance-none text-black disabled:text-opacity-25 disabled:opacity-50 rounded shadow py-1 px-2  mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200">
+          </div>
+
+          
+
+
+            <div class="form-item w-full">
+              <label class="text-xl ">Phone Number</label>
+                <input disabled="@isDisabled" type="text" value="@user.PhoneNumber" class="w-full appearance-none text-black  rounded shadow py-1 px-2 mr-2 disabled:text-opacity-25 disabled:opacity-50 focus:outline-none focus:shadow-outline focus:border-blue-200  "  >
+            </div>
+         
+            <button type="submit" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Save</button>
+            
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</EditForm>
+
+
+@code {
+    private bool isDisabled = true;
+    private string editButton = "Edit";
+
+    private User user = new User();
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await userViewModel.GetUserInfo();
+
+    }
+
+
+    private void Edit()
+    {
+        if (isDisabled == true)
+        {
+            editButton = "Cancel";
+            isDisabled = false;
+        }
+        else
+        {
+            editButton = "Edit";
+            isDisabled = true;
+        }
+    }
+
+    private async Task OnValidUserEdit()
+    {
+
+    }
+
+
+    private async Task uploadFile(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        user.PhotoPath = await userViewModel.UploadAsync(file);
+    }
+
+    
+    
 }

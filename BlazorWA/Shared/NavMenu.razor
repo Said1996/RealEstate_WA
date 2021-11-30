@@ -41,7 +41,7 @@
             </NotAuthorized>
             <Authorized>
                  <li>
-                    <NavLink class="uppercase mt-6 justify-end text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="Profile">
+                    <NavLink class="uppercase mt-6 justify-end text-white pb-2 border-b-4 mr-6 border-purple-700 hover:border-green-400" href="Account">
                          @context.User.Claims.SingleOrDefault(x => x.Type == "Name").Value.ToString()
                     </NavLink>
                 </li>

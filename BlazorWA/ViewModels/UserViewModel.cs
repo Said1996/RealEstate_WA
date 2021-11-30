@@ -2,6 +2,7 @@
 using BlazorWA.Models.Response;
 using BlazorWA.Services.Interfaces;
 using BlazorWA.ViewModels.Interfaces;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace BlazorWA.ViewModels
 {
@@ -14,9 +15,32 @@ namespace BlazorWA.ViewModels
             this.userService = userService;
         }
 
-        public User User { get; set; }
-        public string Token { get; set; }
 
+
+        public async Task<User> GetUserInfo()
+        {
+            return await userService.GetUserInfoAsync();
+        }
+
+        public async Task<string> UploadAsync(IBrowserFile file)
+        {
+            var resizedFile = await file.RequestImageFileAsync(file.Name, 500, 300);
+
+            using (var stream = resizedFile.OpenReadStream())
+            {
+                MemoryStream ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                stream.Close();
+
+                UploadedFile uploadedFile = new UploadedFile();
+                uploadedFile.FileName = file.Name;
+                uploadedFile.FileContent = ms.ToArray();
+                ms.Close();
+
+                return await userService.UploadFileAsync(uploadedFile);
+
+            }
+        }
 
         public async Task<(bool IsSuccessful, string Message)> SignUpAsync(RegisterModel registerModel)
         {

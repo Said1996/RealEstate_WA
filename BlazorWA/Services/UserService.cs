@@ -4,6 +4,7 @@ using BlazorWA.Models.Response;
 using BlazorWA.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 
@@ -59,6 +60,17 @@ namespace BlazorWA.Services
             await _localStorage.RemoveItemAsync("authToken");
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
+        }
+
+        public async Task<User> GetUserInfoAsync()
+        {
+            return await _httpClient.GetFromJsonAsync<User>("User");
+        }
+
+        public async Task<string> UploadFileAsync(UploadedFile uploadedFile)
+        {
+            var response = await _httpClient.PostAsJsonAsync("FileUpload", uploadedFile);
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

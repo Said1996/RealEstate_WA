@@ -33,7 +33,7 @@ namespace BlazorWA.Services
 
         public void MarkUserAsAuthenticated(LoginResult loginResult)
         {
-            Claim[] claims = { };
+            Claim[] claims = Array.Empty<Claim>();
             foreach (var role in loginResult.Roles)
             {
                 claims.Append(new Claim(ClaimTypes.Role, role));
