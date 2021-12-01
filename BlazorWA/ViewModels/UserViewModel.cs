@@ -17,9 +17,15 @@ namespace BlazorWA.ViewModels
 
 
 
+
         public async Task<User> GetUserInfo()
         {
             return await userService.GetUserInfoAsync();
+        }
+
+        public async Task<bool> UpdateUserInfo(User user)
+        {
+            return await userService.UpdateUserInfoAsync(user);
         }
 
         public async Task<string> UploadAsync(IBrowserFile file)

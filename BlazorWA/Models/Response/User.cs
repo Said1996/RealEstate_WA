@@ -1,4 +1,6 @@
-﻿namespace BlazorWA.Models.Response
+﻿using RealEstateApi.Models.Request;
+
+namespace BlazorWA.Models.Response
 {
     public class User
     {
@@ -7,6 +9,6 @@
         public string PhotoPath { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string Token { get; set; }
+        public ICollection<RealEstateModel> UserRealEstatesOffer { get; set; }
     }
 }

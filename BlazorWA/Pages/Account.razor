@@ -10,8 +10,8 @@
     <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" class="bg w-full h-full object-cover object-center absolute z-0">
     <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
       <img src="@(user.PhotoPath ?? "https://via.placeholder.com/450x450")" class="h-24 w-24 object-cover rounded-full">
-      <InputFile @OnChange="uploadFile" hidden="@isDisabled" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Change Picture</InputFile>
-      <h1 class="text-2xl font-semibold">Antonia Howell</h1>
+      <InputFile OnChange="@uploadFile" hidden="@(!isEditing)" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Change Picture</InputFile>
+      <h1 class="text-2xl font-semibold">@user.FullName</h1>
       <h4 class="text-sm font-semibold">Joined Since '19</h4>
     </div>
   </div>
@@ -32,13 +32,13 @@
 
           <div class="flex justify-between">
             <h3 class="text-2xl font-semibold">Basic Information</h3>
-            <button @onclick="Edit" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Edit</button>
+            <button type="button" @onclick="Edit" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">@editButton</button>
           </div>
             <hr>
 
           <div class="form-item">
             <label class="text-xl ">Full Name</label>
-            <input disabled="@isDisabled" type="text" value="@user.FullName" class="w-full appearance-none text-black disabled:text-opacity-25 disabled:opacity-50 rounded shadow py-1 px-2  mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200">
+            <input disabled="@(!isEditing)" type="text" value="@user.FullName" class="w-full appearance-none text-black disabled:text-opacity-25 disabled:opacity-50 rounded shadow py-1 px-2  mr-2 focus:outline-none focus:shadow-outline focus:border-blue-200">
           </div>
 
           
@@ -46,11 +46,13 @@
 
             <div class="form-item w-full">
               <label class="text-xl ">Phone Number</label>
-                <input disabled="@isDisabled" type="text" value="@user.PhoneNumber" class="w-full appearance-none text-black  rounded shadow py-1 px-2 mr-2 disabled:text-opacity-25 disabled:opacity-50 focus:outline-none focus:shadow-outline focus:border-blue-200  "  >
+                <input disabled="@(!isEditing)" type="text" value="@user.PhoneNumber" class="w-full appearance-none text-black  rounded shadow py-1 px-2 mr-2 disabled:text-opacity-25 disabled:opacity-50 focus:outline-none focus:shadow-outline focus:border-blue-200  "  >
             </div>
          
-            <button type="submit" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Save</button>
+            <button type="submit" hidden="@(!isEditing)" class="btn bg-pink-500 p-2 w-18 text-white rounded-lg">Save</button>
             
+            <h3 class="text-2xl font-bold text-red-500">@errorMessage</h3>
+
         </div>
       </div>
     </div>
@@ -61,35 +63,71 @@
 
 
 @code {
-    private bool isDisabled = true;
+    private bool isEditing = false;
     private string editButton = "Edit";
+
+    private string errorMessage = "";
+
+    private string prevFullName = "";
+    private string prevPhotoPath = "";
+    private string prevPhoneNumber = "";
+    private bool firstTimeUpload = true;
 
     private User user = new User();
 
+
+
+
     protected override async Task OnInitializedAsync()
     {
-        user = await userViewModel.GetUserInfo();
+
+        var userInfo = await userViewModel.GetUserInfo();
+        user.FullName = userInfo.FullName;
+        user.Email = userInfo.Email;
+        user.PhoneNumber = userInfo.PhoneNumber;
+        user.PhotoPath = userInfo.PhotoPath;
 
     }
 
 
     private void Edit()
     {
-        if (isDisabled == true)
+        if (firstTimeUpload)
+        {
+            prevPhotoPath = user.PhotoPath;
+            prevFullName = user.FullName;
+            prevPhoneNumber = user.PhoneNumber;
+            firstTimeUpload = false;
+        }
+        if (isEditing == false)
         {
             editButton = "Cancel";
-            isDisabled = false;
+            isEditing = true;
         }
-        else
+        else 
         {
+            user.PhotoPath = prevPhotoPath;
+            user.FullName = prevFullName;
+            user.PhoneNumber = prevPhoneNumber;
             editButton = "Edit";
-            isDisabled = true;
+            isEditing = false;
         }
     }
 
     private async Task OnValidUserEdit()
     {
-
+        var result = await userViewModel.UpdateUserInfo(user);
+        if (result == true)
+        {
+            prevPhotoPath = user.PhotoPath;
+            prevFullName = user.FullName;
+            prevPhoneNumber = user.PhoneNumber;
+            editButton = "Edit";
+            isEditing = false;
+            errorMessage = "";
+        }
+        else
+            errorMessage = "Error";
     }
 
 

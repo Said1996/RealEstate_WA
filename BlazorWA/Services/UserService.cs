@@ -47,6 +47,7 @@ namespace BlazorWA.Services
             }
 
             await _localStorage.SetItemAsync("authToken", loginResult.Token);
+            await _localStorage.SetItemAsync("expiryDate", loginResult.Expiry);
 
 
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginResult);
@@ -58,19 +59,30 @@ namespace BlazorWA.Services
         public async Task Logout()
         {
             await _localStorage.RemoveItemAsync("authToken");
+            await _localStorage.RemoveItemAsync("expiryDate");
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 
         public async Task<User> GetUserInfoAsync()
         {
-            return await _httpClient.GetFromJsonAsync<User>("User");
+            var response = await _httpClient.GetAsync("User");
+            var user = await response.Content.ReadFromJsonAsync<User>();
+
+            return user;
+        }
+
+        public async Task<bool> UpdateUserInfoAsync(User user)
+        {
+            var response = await _httpClient.PutAsJsonAsync("User", user);
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<string> UploadFileAsync(UploadedFile uploadedFile)
         {
             var response = await _httpClient.PostAsJsonAsync("FileUpload", uploadedFile);
-            return await response.Content.ReadAsStringAsync();
+            var result = await response.Content.ReadAsStringAsync();
+            return result;
         }
     }
 }

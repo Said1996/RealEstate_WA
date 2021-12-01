@@ -17,11 +17,14 @@ namespace BlazorWA.Services
             _httpClient = httpClient;
             _localStorage = localStorage;
         }
+
+
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var savedToken = await _localStorage.GetItemAsync<string>("authToken");
+            var expiryDate = await _localStorage.GetItemAsync<string>("expiryDate");
 
-            if (string.IsNullOrWhiteSpace(savedToken))
+            if (string.IsNullOrWhiteSpace(savedToken) || DateTime.Now > DateTime.Parse(expiryDate))
             {
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
