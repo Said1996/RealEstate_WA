@@ -3,7 +3,6 @@ using BlazorWA.Models.Response;
 using BlazorWA.Services.Interfaces;
 using BlazorWA.ViewModels.Interfaces;
 using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
 
 namespace BlazorWA.ViewModels
 {
@@ -17,6 +16,7 @@ namespace BlazorWA.ViewModels
         }
 
         public string SearchQuery { get; set; } = "";
+
 
         public int PageSize { get; set; } = 9;
         public int CurrentPage { get; set; } = 1;
@@ -49,30 +49,23 @@ namespace BlazorWA.ViewModels
             var searchQuery = RequestString();
 
             var response = await realEstateService.SearchRequest(searchQuery);
-            if (response != null)
+            if (response.isSuccess)
             {
-                PaginationBinding(response);
-                var content = await response.Content.ReadAsStringAsync();
-                RealEstateData = JsonConvert.DeserializeObject<RealEstate[]>(content);
+                PaginationBinding(response.pagination);
+                RealEstateData = response.realEstates;
             }
+            else
+                RealEstateData = Array.Empty<RealEstate>();
+
         }
 
-        private void PaginationBinding(HttpResponseMessage response)
+        private void PaginationBinding(SearchPaginationResponse pagination)
         {
-            var pagination = response.Headers.FirstOrDefault(h => h.Key == "x-pagination").Value.FirstOrDefault();
-            if (pagination != null)
-            {
-                var header = JsonConvert.DeserializeObject<SearchPaginationResponse>(pagination);
-                if (header != null)
-                {
-                    TotalPages = header.TotalPages;
-                    ResultCount = header.TotalCount;
-                    CurrentPage = header.PageNumber;
-                    DisableNext = !header.HasNext;
-                    DisablePrev = !header.HasPrevious;
-                }
-            }
-
+            TotalPages = pagination.TotalPages;
+            ResultCount = pagination.TotalCount;
+            CurrentPage = pagination.PageNumber;
+            DisableNext = !pagination.HasNext;
+            DisablePrev = !pagination.HasPrevious;
         }
 
         private string RequestString()

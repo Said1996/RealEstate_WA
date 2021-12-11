@@ -2,50 +2,55 @@
 @inject HttpClient Http
 @inject IBuyViewModel buyViewModel
 
+<PageTitle>Buy</PageTitle>
 
-<SearchBar OnSearch="GetRealEstates"/>
-<Filter/>
+<SearchBar OnSearch="GetRealEstates" />
+<Filter />
 
 
+@if (realEstates != Array.Empty<RealEstate>())
+{
+    <div class="grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        @foreach (var realEstate in realEstates)
+        {
+            <RealEstateCard RealEstateData="@realEstate" />
+        }
 
-<div class="grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-	@foreach(var realEstate in realEstates)
-   {
-	<RealEstateCard RealEstate="@realEstate"/>
+    </div>
+}
+else
+{
+    <h3 class="text-2xl text-blue-600 font-bold">No data found.</h3>
+}
 
-   }
-
-</div>
 
 
 
 <div class="flex justify-center my-10">
-	<Pagination OnSearch="GetRealEstates" />
+    <Pagination OnSearch="GetRealEstates" />
 </div>
 
 
 @code {
 
-	private string showFilter;
+    private RealEstate[] realEstates = Array.Empty<RealEstate>();
 
-	private RealEstate[] realEstates = Array.Empty<RealEstate>();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            realEstates = await Http.GetFromJsonAsync<RealEstate[]>("RealEstate/Search?PageNumber=1&PageSize=10");
 
+        }
+        catch (Exception e)
+        {
 
-	protected override async Task OnInitializedAsync()
-	{
-		try {
-			realEstates = await Http.GetFromJsonAsync<RealEstate[]>("RealEstate/Search?PageNumber=1&PageSize=10");
+        }
+    }
 
-		}
-		catch (Exception e)
-		{
-			
-		}
-	}
+    public async Task GetRealEstates()
+    {
+        realEstates = buyViewModel.RealEstateData;
+    }
 
-	public async Task GetRealEstates()
-	{
-		realEstates = buyViewModel.RealEstateData;
-	}
-	
 }

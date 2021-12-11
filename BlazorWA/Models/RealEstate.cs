@@ -5,13 +5,13 @@ namespace BlazorWA.Models
     public class RealEstate
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? PhotoPath { get; set; }
-        public string? Description { get; set; }
+        public string Name { get; set; }
+        public string PhotoPath { get; set; }
+        public string Description { get; set; }
 
-        public string? Address { get; set; }
-        public string? Country { get; set; }
-        public string? City { get; set; }
+        public string Address { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
 
         public int Price { get; set; }
         public double Space { get; set; }
@@ -28,9 +28,9 @@ namespace BlazorWA.Models
         public bool SecuritySystem { get; set; }
         public bool Garden { get; set; }
 
-        public string? UserName { get; set; }
-        public string? UserPhoneNumber { get; set; }
-        public string? UserPhotoPath { get; set; }
+        public string UserName { get; set; }
+        public string UserPhoneNumber { get; set; }
+        public string UserPhotoPath { get; set; }
 
     }
 }

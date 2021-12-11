@@ -29,7 +29,6 @@ namespace BlazorWA.Services
         {
             var registerAsJson = JsonSerializer.Serialize(registerModel);
             var response = await _httpClient.PostAsync("User/Register", new StringContent(registerAsJson, Encoding.UTF8, "application/json"));
-            //var registerResult = JsonSerializer.Deserialize<RegisterResult>(await response.Content.ReadAsStringAsync());
 
 
             return (response.IsSuccessStatusCode, await response.Content.ReadAsStringAsync());
@@ -78,11 +77,6 @@ namespace BlazorWA.Services
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<string> UploadFileAsync(UploadedFile uploadedFile)
-        {
-            var response = await _httpClient.PostAsJsonAsync("FileUpload", uploadedFile);
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
-        }
+
     }
 }

@@ -13,14 +13,17 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
+builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44388/api/") });
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddScoped<IBuyViewModel, BuyViewModel>();
-builder.Services.AddScoped<ISellViewModel, SellViewModel>();
 builder.Services.AddScoped<IUserViewModel, UserViewModel>();
+builder.Services.AddScoped<IUploadService, UploadService>();
+builder.Services.AddScoped<IUploadViewModel, UploadViewModel>();
 builder.Services.AddScoped<IRealEstateService, RealEstateService>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+
 
 await builder.Build().RunAsync();

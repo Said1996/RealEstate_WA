@@ -10,6 +10,5 @@ namespace BlazorWA.Services.Interfaces
         Task<LoginResult> Login(TokenRequestModel tokenRequestModel);
         Task<bool> UpdateUserInfoAsync(User user);
         Task Logout();
-        Task<string> UploadFileAsync(UploadedFile uploadedFile);
     }
 }

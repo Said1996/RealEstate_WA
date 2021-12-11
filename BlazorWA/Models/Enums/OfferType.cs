@@ -4,10 +4,6 @@
     {
         ForRent,
         ForSale,
-        HotOffer,
-        NoFees,
-        OpenHouse,
-        Pending,
-        Sold
+
     }
 }

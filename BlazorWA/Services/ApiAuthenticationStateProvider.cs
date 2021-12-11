@@ -36,19 +36,22 @@ namespace BlazorWA.Services
 
         public void MarkUserAsAuthenticated(LoginResult loginResult)
         {
-            Claim[] claims = Array.Empty<Claim>();
-            foreach (var role in loginResult.Roles)
-            {
-                claims.Append(new Claim(ClaimTypes.Role, role));
-            }
-
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[]
+            var claims = new Claim[]
             {
                 new Claim("Email", loginResult.Email),
                 new Claim("Name", loginResult.FullName),
-                new Claim("PhoneNumber", loginResult.PhoneNumber),
+                new Claim("PhoneNumber", loginResult.PhoneNumber)
+            };
 
-            }, "apiauth"));
+            var ls = claims.ToList();
+
+            foreach (var role in loginResult.Roles)
+            {
+                ls.Add(new Claim(ClaimTypes.Role, role));
+            }
+            claims = ls.ToArray();
+
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(claims, "apiauth"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             NotifyAuthenticationStateChanged(authState);
         }
