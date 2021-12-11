@@ -38,7 +38,9 @@ namespace BlazorWA.ViewModels
         public string BedroomNum { get; set; }
         public string BathroomNum { get; set; }
 
+        public string Country { get; set; } = "";
         public string City { get; set; } = "";
+        public string Address { get; set; } = "";
 
         public RealEstate[] RealEstateData { get; set; }
 
@@ -93,7 +95,12 @@ namespace BlazorWA.ViewModels
             if (!string.IsNullOrEmpty(MaxSpace))
                 requestString = requestString + "&MaxSpace=" + MaxSpace;
 
-
+            if (!string.IsNullOrEmpty(Country))
+                requestString = requestString + "&Country=" + Country;
+            if (!string.IsNullOrEmpty(City))
+                requestString = requestString + "&City=" + City;
+            if (!string.IsNullOrEmpty(Address))
+                requestString = requestString + "&Address=" + Address;
 
             return requestString;
         }

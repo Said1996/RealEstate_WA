@@ -707,8 +707,8 @@ video {
 .mt-3 {
 	margin-top: 0.75rem;
 }
-.mt-\[111px\] {
-	margin-top: 111px;
+.mt-\[50px\] {
+	margin-top: 50px;
 }
 .mb-0 {
 	margin-bottom: 0px;
@@ -1176,10 +1176,6 @@ video {
 .text-base {
 	font-size: 1rem;
 	line-height: 1.5rem;
-}
-.text-4xl {
-	font-size: 2.25rem;
-	line-height: 2.5rem;
 }
 .text-5xl {
 	font-size: 3rem;

@@ -25,7 +25,9 @@ namespace BlazorWA.ViewModels.Interfaces
         string BedroomNum { get; set; }
         string BathroomNum { get; set; }
 
+        string Country { get; set; }
         string City { get; set; }
+        string Address { get; set; }
 
         RealEstate[] RealEstateData { get; set; }
 

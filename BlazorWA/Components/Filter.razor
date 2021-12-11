@@ -27,9 +27,9 @@
                 <div>
                     <label class="text-white dark:text-gray-200" for="country">Country</label>
                     <select @bind="@country"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        <option>--Select--</option>
+                        <option value="">--Select--</option>
                         <option value="Egypt">Egypt</option>
-                        <option value="USA">USA</option>
+                        
                         
                     </select>
                 </div>
@@ -37,7 +37,7 @@
                 <div>
                     <label class="text-white dark:text-gray-200" for="city">City</label>
                     <select @bind="@city"  class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        <option>--Select--</option>
+                        <option value="">--Select--</option>
                         <option value="Cairo">Cairo</option>
                         <option value="Aswan">Aswan</option>
                         <option value="Sohag">Sohag</option>
@@ -156,7 +156,9 @@
         shopViewModel.BathroomNum = bathNum;
         shopViewModel.MinSpace = spaceFrom;
         shopViewModel.MaxSpace = spaceTo;
-
+        shopViewModel.Country = country;
+        shopViewModel.City = city;
+        
     }
 
 

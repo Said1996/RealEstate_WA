@@ -17,22 +17,28 @@ namespace BlazorWA.ViewModels
 
         public async Task<string> UploadAsync(IBrowserFile file)
         {
-            var resizedFile = await file.RequestImageFileAsync(file.Name, 500, 300);
-
-            using (var stream = resizedFile.OpenReadStream())
+            if (file != null)
             {
-                MemoryStream ms = new MemoryStream();
-                await stream.CopyToAsync(ms);
-                stream.Close();
+                var resizedFile = await file.RequestImageFileAsync(file.Name, 500, 300);
 
-                UploadedFile uploadedFile = new UploadedFile();
-                uploadedFile.FileName = file.Name;
-                uploadedFile.FileContent = ms.ToArray();
-                ms.Close();
+                using (var stream = resizedFile.OpenReadStream())
+                {
+                    MemoryStream ms = new MemoryStream();
+                    await stream.CopyToAsync(ms);
+                    stream.Close();
 
-                return await uploadFileService.UploadFileAsync(uploadedFile);
+                    UploadedFile uploadedFile = new UploadedFile();
+                    uploadedFile.FileName = file.Name;
+                    uploadedFile.FileContent = ms.ToArray();
+                    ms.Close();
 
+                    return await uploadFileService.UploadFileAsync(uploadedFile);
+
+                }
             }
+            else
+                return "";
+
         }
     }
 }

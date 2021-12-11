@@ -3,13 +3,13 @@
         <div class="flex items-center justify-center">
             <div class="max-w-sm w-full sm:w-full lg:w-full py-6 px-3">
                 <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-                    <img class="object-cover w-full h-56 p-4" src="@(RealEstateData.PhotoPath != "" ? RealEstateData.PhotoPath : "https://via.placeholder.com/450x450")" alt="alttext"/>
+                    <img class="object-cover w-full h-56 p-4" src="@(!String.IsNullOrEmpty(RealEstateData.PhotoPath)  ? RealEstateData.PhotoPath : "https://via.placeholder.com/450x450")" alt="alttext"/>
                         
                     
                     <div class="p-4">
-                        <p class="uppercase tracking-wide text-sm font-bold text-gray-700">Detached house • 5y old</p>
+                        <p class="uppercase tracking-wide text-sm font-bold text-gray-700">@(!String.IsNullOrEmpty(RealEstateData.Name) ? RealEstateData.Name : "No Title.")</p>
                         <p class="text-3xl text-gray-900">$@RealEstateData.Price</p>
-                        <p class="text-gray-700">@(RealEstateData.City + " " + RealEstateData.Address)</p>
+                        <p class="text-gray-700">@(RealEstateData.Country + " " + RealEstateData.City + " " + RealEstateData.Address)</p>
                     </div>
                     <div class="flex p-4 border-t border-gray-300 text-gray-700">
                         <div class="flex-1 inline-flex items-center">
@@ -28,7 +28,7 @@
                     <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
                         <div class="text-xs uppercase font-bold text-gray-600 tracking-wide">Realtor</div>
                         <div class="flex items-center pt-2">
-                            <img class="object-cover w-10 h-10 rounded-full mr-3" src="@(RealEstateData.UserPhotoPath != "" ? RealEstateData.UserPhotoPath : "https://www.freeiconspng.com/uploads/no-image-icon-4.png")" />
+                            <img class="object-cover w-10 h-10 rounded-full mr-3" src="@(!String.IsNullOrEmpty(RealEstateData.UserPhotoPath) ? RealEstateData.UserPhotoPath : "https://www.freeiconspng.com/uploads/no-image-icon-4.png")" />
                             <div>
                                 <p class="font-bold text-gray-900">@RealEstateData.UserName</p>
                                 <p class="text-sm text-gray-700">@RealEstateData.UserPhoneNumber</p>

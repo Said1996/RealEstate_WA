@@ -3,7 +3,7 @@
 @inject IRealEstateService realEstateService
 @inject IUploadViewModel UploadViewModel
 @inject NavigationManager nav
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = "Admin, Moderator")]
 
 
 <PageTitle>Sell</PageTitle>
@@ -30,7 +30,7 @@
                     </h6>
                     <div class="flex flex-wrap">
                         <div class="flex flex-col items-center w-full">
-                            <img class="object-cover w-full h-64 mb-3" src="@(image != "" ? image : "https://via.placeholder.com/450x450")" alt="Article">
+                            <img class="object-cover w-full h-64 mb-3" src="@(!String.IsNullOrEmpty(image) ? image : "https://via.placeholder.com/450x450")" alt="Article">
                             <InputFile OnChange="OnFileChange" class="mb-5"></InputFile>
                         </div>
                         <div class="w-full px-4">
@@ -126,11 +126,7 @@
                                 </label>
                                 <InputSelect id="country" @bind-Value="realEstate.Country" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option selected="selected">--Select--</option>
-                                    <option>United States</option>
-
-                                    <option>Canada</option>
-                                    <option>France</option>
-                                    <option>Germany</option>
+                                    <option>Egypt</option>
                                 </InputSelect>
                             </div>
                         </div>
@@ -141,10 +137,9 @@
                                 </label>
                                 <InputSelect id="city" @bind-Value="realEstate.City" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     <option selected="selected">--Select--</option>
-                                    <option>United States</option>
-                                    <option>Canada</option>
-                                    <option>France</option>
-                                    <option>Germany</option>
+                                    <option>Cairo</option>
+                                    <option>Aswan</option>
+                                    <option>Sohag</option>
                                 </InputSelect>
                             </div>
                         </div>
